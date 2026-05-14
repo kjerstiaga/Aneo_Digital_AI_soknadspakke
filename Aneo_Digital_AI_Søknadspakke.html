@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kjersti Aakvik Aga — Aneo Digital & AI</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg:      #F2F0E8;
+  --surface: #E8E5DA;
+  --ink:     #1A1A14;
+  --pine:    #1E3A28;
+  --leaf:    #2D6A4F;
+  --grass:   #52B788;
+  --amber:   #E9C46A;
+  --rust:    #C05A1F;
+  --mid:     #4A4A3A;
+  --light:   #B8B5A5;
+  --rule:    #D0CCC0;
+  --white:   #FAF9F4;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--pine);
+  display: flex; align-items: center;
+  padding: 0 28px; height: 48px;
+  border-bottom: 2px solid var(--grass);
+}
+.nav-brand {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 15px; color: var(--grass);
+  margin-right: 32px; white-space: nowrap;
+}
+.nav-brand em { color: var(--amber); font-style: italic; }
+.nav-links { display: flex; gap: 0; }
+.nav-btn {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: #7AB89A; padding: 0 16px; height: 48px;
+  display: flex; align-items: center; cursor: pointer;
+  border: none; background: none;
+  border-bottom: 2px solid transparent; transition: all 0.15s;
+}
+.nav-btn:hover { color: var(--grass); }
+.nav-btn.active { color: var(--white); border-bottom-color: var(--amber); }
+.nav-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.nav-tag {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 10px; background: rgba(82,183,136,0.15);
+  color: var(--grass); border: 1px solid rgba(82,183,136,0.3);
+  border-radius: 1px;
+}
+.nav-print {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 5px 14px; border: 1px solid rgba(255,255,255,0.2);
+  color: #7AB89A; cursor: pointer; background: none;
+  transition: all 0.15s;
+}
+.nav-print:hover { background: rgba(255,255,255,0.07); color: var(--grass); }
+
+/* ── PAGES ── */
+.page { display: none; padding-top: 48px; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ── DOC CHROME ── */
+.doc {
+  max-width: 860px; margin: 36px auto;
+  background: var(--white); position: relative;
+  box-shadow: 0 2px 40px rgba(0,0,0,0.09);
+}
+.doc-stripe {
+  position: absolute; top: 0; left: 0; bottom: 0; width: 6px;
+  background: linear-gradient(180deg, var(--grass) 0%, var(--pine) 100%);
+}
+.doc-inner { margin-left: 6px; }
+
+/* ── CV ── */
+.cv-header {
+  background: var(--pine); padding: 32px 28px 22px 24px;
+  position: relative; overflow: hidden;
+}
+.cv-header::after {
+  content: ''; position: absolute;
+  top: -40px; right: -40px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(82,183,136,0.12) 0%, transparent 70%);
+}
+.cv-header h1 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 36px; font-weight: 400; color: var(--white);
+  letter-spacing: -0.5px; margin-bottom: 4px;
+}
+.cv-header .role {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--grass); margin-bottom: 12px;
+}
+.cv-header .contacts {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  color: #5A9E7A; display: flex; gap: 20px; flex-wrap: wrap;
+}
+.cv-body { display: flex; }
+.cv-left {
+  width: 37%; background: var(--surface);
+  padding: 22px 16px; border-right: 0.5px solid #C8C4B4;
+  min-height: 860px;
+}
+.cv-right { width: 63%; padding: 22px 20px 28px; }
+.sec-label {
+  font-family: 'Space Mono', monospace; font-size: 7px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--leaf); margin-bottom: 3px;
+}
+.sec-rule { height: 0.5px; background: var(--pine); margin-bottom: 10px; }
+.sec-spacer { margin-bottom: 18px; }
+.skill-item {
+  font-size: 11px; color: var(--mid); margin-bottom: 4px;
+  display: flex; gap: 7px; align-items: baseline;
+}
+.skill-item::before {
+  content: '▸'; color: var(--grass); font-size: 8px; flex-shrink: 0;
+}
+.skill-hl { color: var(--pine); font-weight: 600; }
+.edu-item { margin-bottom: 10px; }
+.edu-deg { font-size: 11px; font-weight: 600; color: var(--ink); }
+.edu-school { font-size: 10px; color: var(--mid); }
+.edu-year { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--rust); }
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.tag {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  padding: 2px 8px; background: rgba(45,106,79,0.1);
+  color: var(--leaf); border-radius: 1px;
+  border: 0.5px solid rgba(45,106,79,0.25);
+}
+.cv-summary {
+  font-family: 'Libre Baskerville', serif; font-size: 13px;
+  font-style: italic; color: var(--rust); line-height: 1.7;
+  border-left: 2px solid var(--grass); padding-left: 12px;
+  margin-bottom: 16px;
+}
+.exp-item { margin-bottom: 15px; }
+.exp-title { font-size: 12px; font-weight: 600; color: var(--ink); }
+.exp-co { font-size: 11px; color: var(--rust); margin-bottom: 1px; }
+.exp-dates { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--mid); margin-bottom: 5px; }
+.exp-bullet {
+  font-size: 10.5px; color: var(--mid); padding-left: 13px;
+  position: relative; margin-bottom: 3px; line-height: 1.5;
+}
+.exp-bullet::before {
+  content: '▸'; position: absolute; left: 0;
+  color: var(--grass); font-size: 8px; top: 2px;
+}
+.exp-bullet strong { color: var(--pine); font-weight: 600; }
+.cv-footer {
+  border-top: 0.5px solid var(--rule); margin: 0 18px;
+  padding: 8px 0;
+}
+.cv-footer span {
+  font-family: 'Space Mono', monospace; font-size: 8px;
+  color: var(--mid); letter-spacing: 0.08em;
+}
+
+/* ── LETTER ── */
+.letter-header { background: var(--pine); padding: 20px 28px 14px 24px; }
+.letter-header h2 {
+  font-family: 'Libre Baskerville', serif; font-size: 24px;
+  font-weight: 400; color: var(--white); margin-bottom: 3px;
+}
+.letter-header .lcontacts {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  color: #5A9E7A; display: flex; gap: 16px; flex-wrap: wrap;
+}
+.letter-body { padding: 30px 38px 40px; }
+.letter-date { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--mid); margin-bottom: 20px; }
+.letter-to { font-size: 12px; color: var(--mid); line-height: 1.6; margin-bottom: 20px; }
+.letter-subj { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 20px; }
+.pull-quote {
+  font-family: 'Libre Baskerville', serif; font-size: 16px;
+  font-style: italic; color: var(--rust); line-height: 1.7;
+  border-left: 2px solid var(--pine); padding-left: 16px;
+  margin-bottom: 22px;
+}
+.letter-p { font-size: 13px; color: var(--ink); line-height: 1.8; margin-bottom: 16px; }
+.letter-sig { font-family: 'Libre Baskerville', serif; font-size: 22px; color: var(--pine); margin-bottom: 3px; }
+.letter-sig-sub { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--mid); }
+
+/* ── MATRIX ── */
+.matrix-header { background: var(--pine); padding: 24px 28px 18px 24px; }
+.matrix-header h1 {
+  font-family: 'Libre Baskerville', serif; font-size: 26px;
+  font-weight: 400; color: var(--white); margin-bottom: 4px;
+}
+.matrix-header .msub {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  color: #5A9E7A; letter-spacing: 0.12em;
+}
+.matrix-body { padding: 26px 26px 36px; }
+.legend { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.leg { display: flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--mid); }
+.leg-dot { width: 10px; height: 10px; border-radius: 1px; }
+table.mt { width: 100%; border-collapse: collapse; }
+table.mt th {
+  font-family: 'Space Mono', monospace; font-size: 8px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 10px 12px; text-align: left; font-weight: 400;
+  border-bottom: 1px solid var(--rule); color: var(--mid);
+}
+table.mt td { padding: 12px 12px; border-bottom: 0.5px solid var(--rule); vertical-align: top; }
+table.mt tr:last-child td { border-bottom: none; }
+table.mt tr:hover td { background: rgba(45,106,79,0.03); }
+.krav-text { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.forklaring { font-size: 11px; color: var(--mid); line-height: 1.55; }
+.badge {
+  display: inline-block; padding: 3px 10px; border-radius: 1px;
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  font-weight: 700; white-space: nowrap; letter-spacing: 0.04em;
+}
+.b-sterk   { background: var(--pine);  color: var(--grass); }
+.b-god     { background: var(--leaf);  color: #C8F0DC; }
+.b-delvis  { background: var(--surface); color: var(--mid); border: 0.5px solid var(--rule); }
+.b-gap     { background: rgba(192,90,31,0.1); color: var(--rust); border: 0.5px solid rgba(192,90,31,0.3); }
+.kw-cloud  { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; padding-top: 20px; border-top: 0.5px solid var(--rule); }
+.kw {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  padding: 4px 11px; border-radius: 1px;
+  background: var(--surface); color: var(--mid);
+  border: 0.5px solid var(--rule);
+}
+
+/* ── PRINCIPLES ── */
+.princ-header { background: linear-gradient(135deg, var(--pine) 0%, #0D2B1A 100%); padding: 28px 28px 20px 24px; }
+.princ-header h1 { font-family: 'Libre Baskerville', serif; font-size: 26px; font-weight: 400; color: var(--white); margin-bottom: 4px; }
+.princ-header .psub { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--grass); letter-spacing: 0.12em; }
+.princ-body { padding: 28px 28px 36px; }
+.princ-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+.princ-card {
+  background: var(--surface); border: 0.5px solid var(--rule);
+  border-top: 2px solid var(--grass); padding: 16px;
+}
+.princ-num { font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.2em; color: var(--leaf); margin-bottom: 6px; }
+.princ-name { font-family: 'Libre Baskerville', serif; font-size: 16px; color: var(--ink); margin-bottom: 6px; }
+.princ-signal { font-size: 11px; color: var(--mid); line-height: 1.6; margin-bottom: 8px; }
+.verdict {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 1px; display: inline-block;
+}
+.v-ok { background: rgba(82,183,136,0.15); color: var(--leaf); }
+.v-warn { background: rgba(233,196,106,0.2); color: #8A6800; }
+
+@media print {
+  nav { display: none; }
+  .page { display: block !important; padding-top: 0; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  body { background: white; }
+  .doc { box-shadow: none; margin: 0; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Kjersti <em>Aakvik Aga</em></div>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="show('cv')">CV</button>
+    <button class="nav-btn" onclick="show('letter')">Søknadsbrev</button>
+    <button class="nav-btn" onclick="show('matrix')">Kompetanse</button>
+    <button class="nav-btn" onclick="show('principles')">5 Prinsipper</button>
+  </div>
+  <div class="nav-right">
+    <span class="nav-tag">Aneo · Avdelingsleder Digital & AI</span>
+    <button class="nav-print" onclick="window.print()">🖨 PDF</button>
+  </div>
+</nav>
+
+<!-- ═══ CV ═══ -->
+<div class="page active" id="page-cv">
+<div class="doc">
+  <div class="doc-stripe"></div>
+  <div class="doc-inner">
+    <div class="cv-header">
+      <h1>Kjersti Aakvik Aga</h1>
+      <div class="role">AI Operations Leader &nbsp;|&nbsp; Digital Transformation &nbsp;|&nbsp; Team Development</div>
+      <div class="contacts">
+        <span>kjersti.aga@gmail.com</span>
+        <span>+47 957 34 176</span>
+        <span>Trondheim, Norway</span>
+        <span>linkedin.com/in/kjersti-aakvik-aga</span>
+      </div>
+    </div>
+    <div class="cv-body">
+      <div class="cv-left">
+        <div class="sec-spacer">
+          <div class="sec-label">Kjernekompetanse</div>
+          <div class="sec-rule"></div>
+          <div class="skill-item"><span class="skill-hl">AI-implementering i produksjon</span></div>
+          <div class="skill-item">Digital strategi og veikart</div>
+          <div class="skill-item">Personalledelse og teamutvikling</div>
+          <div class="skill-item">Prosessdesign fra scratch</div>
+          <div class="skill-item">Gevinstrealisering og KPI</div>
+          <div class="skill-item">Tverrfaglig koordinering</div>
+          <div class="skill-item">Kundedialog og forretningsutvikling</div>
+          <div class="skill-item">Systemintegrasjon og automatisering</div>
+        </div>
+        <div class="sec-spacer">
+          <div class="sec-label">AI & Verktøy</div>
+          <div class="sec-rule"></div>
+          <div class="tag-cloud">
+            <span class="tag">Claude</span>
+            <span class="tag">Copilot</span>
+            <span class="tag">ChatGPT</span>
+            <span class="tag">Rovo</span>
+            <span class="tag">HubSpot MCP</span>
+            <span class="tag">Atlassian MCP</span>
+            <span class="tag">Python</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">M365</span>
+            <span class="tag">Jira</span>
+          </div>
+        </div>
+        <div class="sec-spacer">
+          <div class="sec-label">Utdanning</div>
+          <div class="sec-rule"></div>
+          <div class="edu-item">
+            <div class="edu-deg">Prosjektledelse 1–3 (Karakter A)</div>
+            <div class="edu-school">BI Handelshøgskolen</div>
+            <div class="edu-year">2012 · 30 ECTS</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-deg">Bachelor IT & økonomi</div>
+            <div class="edu-school">Handelshøgskolen i Bodø</div>
+            <div class="edu-year">2003 · 180 stp</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-deg">Media & økonomi</div>
+            <div class="edu-school">NTNU, Trondheim</div>
+            <div class="edu-year">2004</div>
+          </div>
+        </div>
+        <div class="sec-spacer">
+          <div class="sec-label">Språk</div>
+          <div class="sec-rule"></div>
+          <div class="skill-item">Norsk — morsmål</div>
+          <div class="skill-item">Engelsk — flytende</div>
+        </div>
+      </div>
+      <div class="cv-right">
+        <div class="cv-summary">
+          Jeg bygger AI-drevne systemer som faktisk virker i produksjon — og leder teamene som bruker dem. Bakgrunnen er uvanlig: IT-grad, 20 år med komplekse systemintegrasjoner og prosessdesign, og de siste to årene med å designe og rulle ut AI-automatisering fra scratch i reelle forretningsmiljøer.
+        </div>
+        <div class="sec-label">Erfaring</div>
+        <div class="sec-rule"></div>
+
+        <div class="exp-item">
+          <div class="exp-title">Customer Success Lead — AI & Operations Architect</div>
+          <div class="exp-co">FARA AS</div>
+          <div class="exp-dates">Mar 2025 — nå</div>
+          <div class="exp-bullet">Leder team på 4 CSM-er med ukentlige 1:1-er, kvartalsvis scorecard og AI-adopsjonsprogram.</div>
+          <div class="exp-bullet">Designet og implementerte <strong>7 operative AI-workflows</strong> fra scratch — estimated <strong>25–34 timer/mnd</strong> spart for teamet.</div>
+          <div class="exp-bullet">Bygget digital strategi og veikart for CSM-funksjonen: HubSpot, Jira og M365 integrert via AI-drevne arbeidsflyter.</div>
+          <div class="exp-bullet">Gevinstrealisering dokumentert: onboarding redusert fra dager til &lt;10 minutter, nullpersonavhengighet i prosessene.</div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-title">Sales Manager</div>
+          <div class="exp-co">FARA AS</div>
+          <div class="exp-dates">Jan 2022 — Feb 2025</div>
+          <div class="exp-bullet">Ledet komplekse tilbuds- og kontraktsprosesser — inkl. presentasjon for <strong>Modaxo/Volaris konsernledelse</strong> ($3,7M USD TCV).</div>
+          <div class="exp-bullet">Eier av prismodeller og kostnadskalkyler for hele kundeporteføljen (Ticketing + RTI).</div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-title">Key Account Norway</div>
+          <div class="exp-co">FARA AS</div>
+          <div class="exp-dates">Apr 2020 — Jan 2022</div>
+          <div class="exp-bullet">Koordinerte AtB Regionanbud 2020: <strong>600 busser, 5 operatører parallelt</strong> — prisingsmodell-eier.</div>
+          <div class="exp-bullet">Primær teknisk og kommersiell kontakt for norske kollektivtransportmyndigheter på tvers av komplekse systemer (ITxPT, MDM, validering, betalingssystemer).</div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-title">Support Manager</div>
+          <div class="exp-co">FARA AS</div>
+          <div class="exp-dates">Okt 2017 — Mar 2020</div>
+          <div class="exp-bullet">Bygget nordisk supportfunksjon fra scratch — 4 land, fullt budsjett- og personalansvar, rekruttering.</div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-title">Førstesekretær / Systemansvarlig</div>
+          <div class="exp-co">Hommelvik ungdomsskole, Malvik kommune</div>
+          <div class="exp-dates">Jan 2014 — Sep 2017</div>
+          <div class="exp-bullet">Prosjektansvarlig for heldigital arbeidsflyt — eArkiv-integrasjon og systemtesting i offentlig sektor.</div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-title">Senior Consultant</div>
+          <div class="exp-co">DNB Livsforsikring ASA</div>
+          <div class="exp-dates">Des 2006 — Jun 2013</div>
+          <div class="exp-bullet">Prosjektleder og kravspesifikasjon i pensjon/livsforsikring. Senior klientansvarlig for yrkespensjonsportefølje.</div>
+        </div>
+      </div>
+    </div>
+    <div class="cv-footer">
+      <span>Kjersti Aakvik Aga &nbsp;·&nbsp; kjersti.aga@gmail.com &nbsp;·&nbsp; +47 957 34 176 &nbsp;·&nbsp; linkedin.com/in/kjersti-aakvik-aga</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ SØKNADSBREV ═══ -->
+<div class="page" id="page-letter">
+<div class="doc" style="max-width:740px;">
+  <div class="doc-stripe"></div>
+  <div class="doc-inner">
+    <div class="letter-header">
+      <h2>Kjersti Aakvik Aga</h2>
+      <div class="lcontacts">
+        <span>kjersti.aga@gmail.com</span>
+        <span>+47 957 34 176</span>
+        <span>Trondheim</span>
+        <span>linkedin.com/in/kjersti-aakvik-aga</span>
+      </div>
+    </div>
+    <div class="letter-body">
+      <div class="letter-date">15. mai 2026</div>
+      <div class="letter-to">
+        Hilde Landsem, Konserndirektør Energy Markets<br>
+        Aneo AS, Trondheim
+      </div>
+      <div class="letter-subj">Søknad: Avdelingsleder Digital & AI</div>
+
+      <div class="pull-quote">
+        Jeg kjenner ikke kraftmarkedet. Det er det ærlige svaret. Det jeg kjenner, er nøyaktig hva dere beskriver som selve jobben.
+      </div>
+
+      <div class="letter-p">
+        Stillingen handler om å lede et fagmiljø som skal bruke AI til å skape beslutningsstøtte og optimere operasjoner i et komplekst, datadrevet domene. Det er ikke en utviklerstilling — det er en lederstilling der evnen til å drive strategisk AI-utvikling, bygge sterke team og realisere gevinster veier tyngre enn domeneekspertise man kan lese seg til. Og det er akkurat den jobben jeg har gjort de siste to årene, i en annen sektor.
+      </div>
+
+      <div class="letter-p">
+        I FARA AS designet og implementerte jeg et fullt AI-drevet operasjonelt rammeverk fra scratch — syv operative workflows i produksjon, integrert på tvers av HubSpot, Jira og Microsoft 365. Resultatet: 25–34 timer spart per måned for teamet, onboarding redusert fra dager til under ti minutter, og systemer som lever i plattformen — ikke i hodet på enkeltpersoner. Jeg ledet teamet gjennom endringen, bygget opplæringsmateriell, fulgte opp adopsjon og målte gevinster. Jeg designet også digital strategi og veikart for funksjonen, prioriterte utviklingsinitiativer og rapporterte til VP-nivå på fremdrift.
+      </div>
+
+      <div class="letter-p">
+        Det som er overførbart til Aneo er ikke metaforisk — det er direkte: strukturert gap-analyse for å identifisere høy-verdi automatiseringspunkter, design av AI-workflows med valideringslogikk og menneskelige godkjenningspunkter, gevinstrealisering som faktisk måles, og lederskap som bygger kultur for digitalisering fremfor å tvinge det frem. Bakgrunnen min — IT-bachelor, prosjektledelse fra BI med A i alle moduler, og 20 år med systemintegrasjon i en hardwarenær bransje — gir et analytisk fundament som er relevant uavhengig av domene.
+      </div>
+
+      <div class="letter-p">
+        Kraftmarkedet og energidisponering er nytt terreng for meg — det er ærlig. Men dere søker ikke primært en kraftmarkedsekspert til denne rollen; dere søker en som kan lede et fagmiljø, drive digital strategi og sikre at AI-investeringene faktisk skaper verdi i produksjon. Det er det jeg har dokumentert at jeg gjør.
+      </div>
+
+      <div class="letter-p" style="margin-bottom:28px;">
+        Aneo er et selskap som bygger noe, ikke forvalter noe. Det er der jeg er best.
+      </div>
+
+      <div class="letter-sig">Kjersti Aakvik Aga</div>
+      <div class="letter-sig-sub">kjersti.aga@gmail.com &nbsp;·&nbsp; +47 957 34 176</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ KOMPETANSEMATRISE ═══ -->
+<div class="page" id="page-matrix">
+<div class="doc">
+  <div class="doc-stripe"></div>
+  <div class="doc-inner">
+    <div class="matrix-header">
+      <h1>Kompetansematrise</h1>
+      <div class="msub">Avdelingsleder Digital & AI · Aneo AS · Kjersti Aakvik Aga</div>
+    </div>
+    <div class="matrix-body">
+      <div class="legend">
+        <div class="leg"><div class="leg-dot" style="background:var(--pine)"></div>Sterk match</div>
+        <div class="leg"><div class="leg-dot" style="background:var(--leaf)"></div>God match</div>
+        <div class="leg"><div class="leg-dot" style="background:var(--surface);border:0.5px solid var(--rule)"></div>Delvis match</div>
+        <div class="leg"><div class="leg-dot" style="background:rgba(192,90,31,0.15);border:0.5px solid rgba(192,90,31,0.3)"></div>Gap — adressert</div>
+      </div>
+      <table class="mt">
+        <thead>
+          <tr>
+            <th style="width:36%">Krav fra stillingen</th>
+            <th style="width:14%">Match</th>
+            <th>Dokumentasjon</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="krav-text">Lede og utvikle fagmiljø (13 ansatte)</div></td>
+            <td><span class="badge b-sterk">Sterk</span></td>
+            <td><div class="forklaring">Leder 4 CSM-er med ukentlige 1:1-er, kvartalsvis scorecard og AI-adopsjonsprogram. Tidligere: nordisk supportteam fra scratch (4 land, fullt personalansvar, 2,5 år). Totalt 7+ år med personalledelse.</div></td>
+          </tr>
+          <tr>
+            <td><div class="krav-text">Utvikle digital strategi og veikart innen kraftmarkedsoperasjoner</div></td>
+            <td><span class="badge b-god">God</span></td>
+            <td><div class="forklaring">Bygget digital strategi og veikart for CSM-funksjonen fra scratch — prioriterte initiativer, satte mål, fulgte opp gevinster. Metoden er overførbar; kraftmarked-domenet er nytt, men kartlegging av operasjonelle behov og AI-muligheter er kjernekompetanse.</div></td>
+          </tr>
+          <tr>
+            <td><div class="krav-text">Drive AI-satsing i produksjon — ikke bare konsept</div></td>
+            <td><span class="badge b-sterk">Sterk</span></td>
+            <td><div class="forklaring">7 operative AI-workflows i drift. 25–34 timer/mnd spart, onboarding redusert fra dager til &lt;10 min, nullpersonavhengighet. Alle workflows er i faktisk produksjon — ikke demo eller PoC.</div></td>
+          </tr>
+          <tr>
+            <td><div class="krav-text">Sikre gevinstrealisering fra digitale initiativer</div></td>
+            <td><span class="badge b-sterk">Sterk</span></td>
+            <td><div class="forklaring">Definert og målt gevinster konsekvent: timer spart, prosesser automatisert, onboarding-tid, kapasitetsfrigjøring (~0,2 ÅV annualisert). Rapportert til VP-nivå. Det er nettopp det stillingen beskriver.</div></td>
+          </tr>
+          <tr>
+            <td><div class="krav-text">Prioritere og følge opp utviklingsinitiativer</div></td>
+            <td><span class="badge b-sterk">Sterk</span></td>
+            <td><div class="forklaring">Strukturert gap-analyse → prioritering → implementering → evaluering, gjennomført på tvers av HubSpot, Jira og M365 i parallell. Samme metodikk som trengs i en digital plattform for kraftmarkedsoperasjoner.</div></td>
+          </tr>
+          <tr>
+            <td><div class="krav-text">Kundedialog og forretningsutvikling</div></td>
+            <td><span class="badge b-sterk">Sterk</span></td>
+            <td><div class="forklaring">9 år med kundedialog i offentlig anskaffelse og konsernnivå-presentasjoner ($3,7M USD TCV for Modaxo/Volaris). Strategi og kommersielt ansvar er kjernen i bakgrunnen.</div></td>
+          </tr>
+          <tr>
+            <td><div class="krav-text">Høyere utdanning og erfaring fra AI og IT-utvikling</div></td>
+            <td><span class="badge b-god">God</span></td>
+            <td><div class="forklaring">IT-bachelor (Bodø 2003) med algoritmer, databaser, systemutvikling. Prosjektledelse BI karakter A. 2 år daglig AI-verktøybruk i produksjon (ikke bare innhold — systemintegrasjon, automation, MCP). Python på funksjonelt nivå.</div></td>
+          </tr>
+          <tr>
+            <td><div class="krav-text">Kunnskap om kraftmarkedene</div></td>
+            <td><span class="badge b-gap">Gap — ærlig</span></td>
+            <td><div class="forklaring">Ingen direkte erfaring med kraftmarked, energidisponering eller markedsoperasjoner. Overførbar kontekst: 5 år med presisjonskritiske operasjonelle systemer i kollektivtransport (validering, sensordata, sanntidsdata) gir forståelse for kompleksitet i kritisk infrastruktur.</div></td>
+          </tr>
+          <tr>
+            <td><div class="krav-text">Trygg og tydelig leder — motiverer og bygger sterke team</div></td>
+            <td><span class="badge b-sterk">Sterk</span></td>
+            <td><div class="forklaring">Teammedlem adopterte AI-verktøy på eget initiativ etter 2 måneder — det sterkeste tegnet på vellykket lederskap. Ukentlige 1:1-er dokumentert, kvartalsvis scorecard gjennomført, onboarding-programmer bygget.</div></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="kw-cloud">
+        <span class="kw">AI i produksjon</span>
+        <span class="kw">digital strategi</span>
+        <span class="kw">veikart</span>
+        <span class="kw">personalledelse</span>
+        <span class="kw">gevinstrealisering</span>
+        <span class="kw">beslutningsstøtte</span>
+        <span class="kw">systemintegrasjon</span>
+        <span class="kw">forretningsutvikling</span>
+        <span class="kw">prosessdesign</span>
+        <span class="kw">energiomstilling</span>
+        <span class="kw">kraftmarked</span>
+        <span class="kw">teamutvikling</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ 5 PRINSIPPER ═══ -->
+<div class="page" id="page-principles">
+<div class="doc">
+  <div class="doc-stripe"></div>
+  <div class="doc-inner">
+    <div class="princ-header">
+      <h1>Principles of Top Performers</h1>
+      <div class="psub">Sjekkliste — Aneo Digital & AI · Kjersti Aakvik Aga</div>
+    </div>
+    <div class="princ-body">
+      <div class="princ-grid">
+
+        <div class="princ-card">
+          <div class="princ-num">01 — Ghost Notes</div>
+          <div class="princ-name">Lytt til det usagte</div>
+          <div class="princ-signal">Stillingen er i Energy Markets — ikke IT. Det signaliserer at de primært søker en leder med gjennomføringskraft og AI-praksis, ikke en kraftmarkedsekspert. "Gjerne med kunnskap om kraftmarkedene" er ønskelig, ikke krav. Brevet adresserer gapet offensivt og tidlig — det er riktig strategi.</div>
+          <span class="verdict v-ok">✓ Adressert direkte i brev</span>
+        </div>
+
+        <div class="princ-card">
+          <div class="princ-num">02 — Loss Function</div>
+          <div class="princ-name">Konkrete tall beviser verdi</div>
+          <div class="princ-signal">25–34t/mnd spart, onboarding &lt;10 min, 7 workflows i drift, 0,2 ÅV frigitt kapasitet. Aneo er et ingeniørselskap med energiøkonomer — de vil ha tall, ikke adjektiver. Pakken leverer det.</div>
+          <span class="verdict v-ok">✓ Fire datapunkter dokumentert</span>
+        </div>
+
+        <div class="princ-card">
+          <div class="princ-num">03 — Adaptive Tension</div>
+          <div class="princ-name">Eie gapet offensivt</div>
+          <div class="princ-signal">Kraftmarked-gapet er det åpenbare innvendingen. Brevet sier det rett ut i åpningslinjen — og snur det til et argument: dere søker ikke en kraftekspert, dere søker en som kan lede og realisere AI-gevinster. Curiosity + Objectivity i én setning.</div>
+          <span class="verdict v-ok">✓ Åpningslinjen eier det</span>
+        </div>
+
+        <div class="princ-card">
+          <div class="princ-num">04 — Time Horizon</div>
+          <div class="princ-name">Plant eikene nå</div>
+          <div class="princ-signal">Aneo er et fornybarkonsern i sterk vekst med Norden-ambisjon. Avdelingsleder Digital & AI er en ledergruppe-stilling i et sentralt satsingsområde. Det er ikke en sidesteg — det er en eik. Kraftsektoren er en av de mest teknologidrevne sektorene fremover.</div>
+          <span class="verdict v-ok">✓ Riktig horisont for karriereretning</span>
+        </div>
+
+        <div class="princ-card" style="grid-column:1/-1;">
+          <div class="princ-num">05 — Identity as Anchor</div>
+          <div class="princ-name">Er dette deg — eller en tilpasning?</div>
+          <div class="princ-signal">Kjernespørsmålet: CV-en er reframet mot "AI Operations Leader" — er det sant? Svaret er ja. Du bygger faktisk AI-systemer i produksjon og leder team gjennom endring. Det er ikke en pose-tittel, det er hva du gjør. "Aneo er et selskap som bygger noe, ikke forvalter noe. Det er der jeg er best." — det er identitetsforankret, ikke rolletilpasset.</div>
+          <span class="verdict v-ok">✓ Substansen holder — ikke bare rebranding</span>
+        </div>
+
+      </div>
+
+      <div style="background:var(--surface);border:0.5px solid var(--rule);padding:18px 20px;">
+        <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--leaf);margin-bottom:4px;">Samlet vurdering — risiko og anbefaling</div>
+        <div style="height:0.5px;background:var(--pine);margin-bottom:12px;"></div>
+        <div style="font-size:12px;color:var(--mid);line-height:1.65;">
+          <strong style="color:var(--ink);">Reell risiko:</strong> Kraftmarked-domenekunnskap mangler fullstendig. Hvis Aneo primært trenger noen som kan snakke energidisponering og markedsoperasjoner flytende fra dag én, er du ikke riktig kandidat. Det bør du vite.<br><br>
+          <strong style="color:var(--ink);">Styrken:</strong> Ingen andre søkere vil ha kombinasjonen av AI-i-produksjon-bevis + strukturert gevinstrealisering + lederskap i fagteam + kommersiell bredde. Hvis Aneo tror at domene kan læres men AI-gjennomføring er det sjeldne, er du sterk.<br><br>
+          <strong style="color:var(--ink);">Anbefaling:</strong> Send pakken. Frist er 24. mai — du har ingenting å tape og mye å vinne. Vurder å ta direkte kontakt med Hilde Landsem på telefon (48 16 45 97) i forkant — det er en ledergruppe-stilling og direkte dialog viser initiativ og selvtillit.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+function show(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
